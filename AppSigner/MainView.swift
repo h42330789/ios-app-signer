@@ -871,8 +871,8 @@ class MainView: NSView, URLSessionDataDelegate, URLSessionDelegate, URLSessionDo
                         }
                         let isWildcard = profile.appID == "*" // TODO: support com.example.* wildcard
                         if !isWildcard && (newApplicationID != "" && newApplicationID != profile.appID) {
-                            setStatus("Unable to change App ID to \(newApplicationID), provisioning profile won't allow it")
-                            cleanup(tempFolder); return
+//                            setStatus("Unable to change App ID to \(newApplicationID), provisioning profile won't allow it")
+//                            cleanup(tempFolder); return
                         } else if isWildcard {
                             if newApplicationID != "" {
                                 profile.update(trueAppID: newApplicationID)
@@ -917,8 +917,8 @@ class MainView: NSView, URLSessionDataDelegate, URLSessionDelegate, URLSessionDo
                             let appexPlist = appexFile.stringByAppendingPathComponent("Info.plist")
                             if let appexBundleID = getPlistKey(appexPlist, keyName: "CFBundleIdentifier"){
                                 let newAppexID = "\(newApplicationID)\(appexBundleID.substring(from: oldAppID.endIndex))"
-                                setStatus("Changing \(appexFile) id to \(newAppexID)")
-                                _ = setPlistKey(appexPlist, keyName: "CFBundleIdentifier", value: newAppexID)
+//                                setStatus("Changing \(appexFile) id to \(newAppexID)")
+//                                _ = setPlistKey(appexPlist, keyName: "CFBundleIdentifier", value: newAppexID)
                             }
                             if Process().execute(defaultsPath, workingDirectory: nil, arguments: ["read", appexPlist,"WKCompanionAppBundleIdentifier"]).status == 0 {
                                 _ = setPlistKey(appexPlist, keyName: "WKCompanionAppBundleIdentifier", value: newApplicationID)
@@ -937,13 +937,13 @@ class MainView: NSView, URLSessionDataDelegate, URLSessionDelegate, URLSessionDo
                         recursiveDirectorySearch(appBundlePath, extensions: ["appex"], found: changeAppexID)
                     }
                     
-                    setStatus("Changing App ID to \(newApplicationID)")
-                    let IDChangeTask = setPlistKey(appBundleInfoPlist, keyName: "CFBundleIdentifier", value: newApplicationID)
-                    if IDChangeTask.status != 0 {
-                        setStatus("Error changing App ID")
-                        Log.write(IDChangeTask.output)
-                        cleanup(tempFolder); return
-                    }
+//                    setStatus("Changing App ID to \(newApplicationID)")
+//                    let IDChangeTask = setPlistKey(appBundleInfoPlist, keyName: "CFBundleIdentifier", value: newApplicationID)
+//                    if IDChangeTask.status != 0 {
+//                        setStatus("Error changing App ID")
+//                        Log.write(IDChangeTask.output)
+//                        cleanup(tempFolder); return
+//                    }
                 }
                 
                 //MARK: Change Display Name
